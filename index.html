@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Multi Target AR with Animations</title>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    
+    <!-- アニメーション用のカスタムコンポーネント -->
+    <script>
+      AFRAME.registerComponent('mytarget', {
+        init: function() {
+          this.el.addEventListener('targetFound', event => {
+            console.log("target found");
+            // ターゲットが見つかった時の処理
+          });
+          this.el.addEventListener('targetLost', event => {
+            console.log("target lost");
+            // ターゲットを見失った時の処理
+          });
+        }
+      });
+      AFRAME.registerComponent('mytarget', {
+        init: function() {
+          console.log("Component initialized");
+          const modelEl = this.el.querySelector('a-gltf-model');
+          modelEl.addEventListener('model-loaded', () => console.log('Model loaded'));
+          modelEl.addEventListener('model-error', (error) => console.log('Model error:', error));
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a-scene
+      mindar-image="imageTargetSrc: ./assets/targets/targets.mind;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false">
+      
+      <a-assets>
+        <a-asset-item id="02_TyubuSangaku" src="./assets/models/02_TyubuSangaku.glb"></a-asset-item>
+        <a-asset-item id="01_Yanbaru" src="./assets/models/01_Yanbaru.glb"></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      
+      <!-- ポスター1用のエンティティ（回転アニメーション） -->
+      <a-entity mindar-image-target="targetIndex: 0" mytarget>
+        <a-gltf-model
+          rotation="0 0 0"
+          position="0 0 0"
+          scale="1 1 1"
+          src="#02_TyubuSangaku"
+          animation="property: rotation; 
+                     to: 0 360 0; 
+                     dur: 2000; 
+                     easing: linear; 
+                     loop: true">
+        </a-gltf-model>
+      </a-entity>
+
+      <!-- ポスター2用のエンティティ（浮遊アニメーション） -->
+      <a-entity mindar-image-target="targetIndex: 1" mytarget>
+</a-gltf-model>
+        <a-gltf-model
+          rotation="0 0 0"
+          position="0 0 0"
+          scale="1 1 1"
+          src="#01_Yanbaru"
+          animation__position="property: position; 
+                              to: 0 0.2 0.1; 
+                              dur: 1000; 
+                              easing: easeInOutQuad; 
+                              loop: true; 
+                              dir: alternate"
+          animation__scale="property: scale; 
+                           to: 0.006 0.006 0.006; 
+                           dur: 1000; 
+                           easing: easeInOutQuad; 
+                           loop: true; 
+                           dir: alternate">
+        </a-gltf-model>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
