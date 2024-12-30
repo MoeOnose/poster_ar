@@ -29,8 +29,16 @@
         }
       });
     </script>
+    <!-- HOW TO DEPLOY AND VIEW -->
+    <!-- 1.github pagesで公開設定したプランチ（main）にpush -->
+    <!-- 2.https://moeonose.github.io/poster_ar/ で公開される（URLは全ポスター共通） -->
+    <!-- 3.URLに紐づいたNFCタグをスマホで読み込みカメラを起動しポスターを読み込む -->
   </head>
   <body>
+    <!-- target: マーカーの特徴点を登録したデータ。複数同時に登録が可能。指定方法は配列と同様。 -->
+    <!-- 今回デバッグの影響で0: 02_TyubuSangaku, 01: 01_Yanbaruになっている -->
+    <!-- TODO: マーカーを更新したら以下で.mindデータを取得し直す。 -->
+    <!-- https://hiukim.github.io/mind-ar-js-doc/tools/compile/ -->
     <a-scene
       mindar-image="imageTargetSrc: ./assets/targets/targets.mind;"
       color-space="sRGB"
