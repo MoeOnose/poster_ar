@@ -5,36 +5,18 @@
     <title>Multi Target AR with Animations</title>
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-    
-    <!-- アニメーション用のカスタムコンポーネント -->
-    <script>
-      AFRAME.registerComponent('mytarget', {
-        init: function() {
-          this.el.addEventListener('targetFound', event => {
-            console.log("target found");
-            // ターゲットが見つかった時の処理
-          });
-          this.el.addEventListener('targetLost', event => {
-            console.log("target lost");
-            // ターゲットを見失った時の処理
-          });
-        }
-      });
-      AFRAME.registerComponent('mytarget', {
-        init: function() {
-          console.log("Component initialized");
-          const modelEl = this.el.querySelector('a-gltf-model');
-          modelEl.addEventListener('model-loaded', () => console.log('Model loaded'));
-          modelEl.addEventListener('model-error', (error) => console.log('Model error:', error));
-        }
-      });
-    </script>
+    <script src="./js/loading.js"></script>
+    <link rel="stylesheet" href="./css/loading.css">
     <!-- HOW TO DEPLOY AND VIEW -->
     <!-- 1.github pagesで公開設定したプランチ（main）にpush -->
     <!-- 2.https://moeonose.github.io/poster_ar/ で公開される（URLは全ポスター共通） -->
     <!-- 3.URLに紐づいたNFCタグをスマホで読み込みカメラを起動しポスターを読み込む -->
   </head>
   <body>
+    <!-- ローディングコンポーネント -->
+    <div id="loading-container"></div>
+
+    <!-- AR Scene -->
     <!-- target: マーカーの特徴点を登録したデータ。複数同時に登録が可能。指定方法は配列と同様。 -->
     <!-- 今回デバッグの影響で0: 02_TyubuSangaku, 01: 01_Yanbaruになっている -->
     <!-- TODO: マーカーを更新したら以下で.mindデータを取得し直す。 -->
