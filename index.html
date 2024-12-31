@@ -40,7 +40,7 @@
     <!-- TODO: マーカーを更新したら以下で.mindデータを取得し直す。 -->
     <!-- https://hiukim.github.io/mind-ar-js-doc/tools/compile/ -->
     <a-scene
-      mindar-image="imageTargetSrc: ./assets/targets/targets.mind;"
+      mindar-image="imageTargetSrc: ./assets/targets/targets.mind; uiLoading: false;"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
@@ -70,7 +70,6 @@
 
       <!-- ポスター2用のエンティティ（浮遊アニメーション） -->
       <a-entity mindar-image-target="targetIndex: 1" mytarget>
-</a-gltf-model>
         <a-gltf-model
           rotation="0 0 0"
           position="0 0 0"
