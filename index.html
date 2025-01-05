@@ -38,9 +38,9 @@
       <!-- ポスター1用のエンティティ（回転アニメーション） -->
       <a-entity mindar-image-target="targetIndex: 0" mytarget>
         <a-gltf-model
-          rotation="0 0 0"
+          rotation="-1 0 0"
           position="0 0 0"
-          scale="1 1 1"
+          scale="0.6 0.6 0.6"
           src="#02_TyubuSangaku"
           animation="property: rotation; 
                      to: 0 360 0; 
@@ -53,22 +53,15 @@
       <!-- ポスター2用のエンティティ（浮遊アニメーション） -->
       <a-entity mindar-image-target="targetIndex: 1" mytarget>
         <a-gltf-model
-          rotation="0 0 0"
+          rotation="-1 0 0"
           position="0 0 0"
-          scale="1 1 1"
+          scale="0.6 0.6 0.6"
           src="#01_Yanbaru"
-          animation__position="property: position; 
-                              to: 0 0.2 0.1; 
-                              dur: 1000; 
-                              easing: easeInOutQuad; 
-                              loop: true; 
-                              dir: alternate"
-          animation__scale="property: scale; 
-                           to: 0.006 0.006 0.006; 
-                           dur: 1000; 
-                           easing: easeInOutQuad; 
-                           loop: true; 
-                           dir: alternate">
+          animation="property: rotation; 
+                     to: 0 360 0; 
+                     dur: 2000; 
+                     easing: linear; 
+                     loop: true">
         </a-gltf-model>
       </a-entity>
     </a-scene>
