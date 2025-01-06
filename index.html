@@ -3,6 +3,8 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Multi Target AR with Animations</title>
+    <!-- ARはaframe。WebVR/WebARコンテンツを作成するためのフレームワーク。Three.jsがベース -->
+    <!-- MindARは画像認識用 -->
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
     <script src="./js/loading.js"></script>
@@ -11,6 +13,7 @@
     <!-- 1.github pagesで公開設定したプランチ（main）にpush -->
     <!-- 2.https://moeonose.github.io/poster_ar/ で公開される（URLは全ポスター共通） -->
     <!-- 3.URLに紐づいたNFCタグをスマホで読み込みカメラを起動しポスターを読み込む -->
+    <!-- ローカルではpythonで確認してた。キャッシュでモデル反映されない問題は消すの面倒なのでポートを変えてデバッグした( $python3 -m http.server 8000 ) -->
   </head>
   <body>
     <!-- ローディングコンポーネント -->
@@ -27,14 +30,14 @@
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false">
-      
+      <!-- モデルの読み込み -->
       <a-assets>
         <a-asset-item id="02_TyubuSangaku" src="./assets/models/02_TyubuSangaku.glb"></a-asset-item>
         <a-asset-item id="01_Yanbaru" src="./assets/models/01_Yanbaru.glb"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      
+      <!-- 以下でモデルとマーカーを紐付け -->
       <!-- ポスター1用のエンティティ（回転アニメーション） -->
       <a-entity mindar-image-target="targetIndex: 0" mytarget>
         <a-gltf-model
@@ -50,7 +53,7 @@
         </a-gltf-model>
       </a-entity>
 
-      <!-- ポスター2用のエンティティ（浮遊アニメーション） -->
+      <!-- ポスター2用のエンティティ（回転アニメーション） -->
       <a-entity mindar-image-target="targetIndex: 1" mytarget>
         <a-gltf-model
           rotation="0 0 0"
